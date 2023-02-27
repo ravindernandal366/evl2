@@ -1,130 +1,119 @@
-# React - Fetch - Restaurants
+## React Search News App
+
+#### Problem Statement
+
+Create the following application the boilerplate code provided .
 
 ## Submission Instructions [Please note]
 
-### Maximum Marks - 12
+## Maximum Marks - 16
 
-- The Submission should not contain spaces, for example `/rct-101 folder/eval` will not work
-- Do not push node_modules to github
-- Rubrics / Marking Scheme is below ( we will convert this back to a scale of 10 )
-
-```
-✅ Able to submit and run the application - 1 mark
-✅ should render RestaurantCard.jsx correctly- 2 mark
-✅ loading indicator should work - 1 mark
-✅ should render Restaurants page - 3 mark
-✅ Should work with pagination correctly - 2 mark
-✅ should display correct data on page change - 3 marks
+- The Submission should not contain spaces, for example /rct-101 folder/eval will not work
+- Do not push node_modules and package_lock.json to github
 
 ```
-
-## Description
-
-- You need to make an application that lists Restaurants from an API
-- The user should be able to apply pagination
-
-## Boilerplate
-
-- You are given a set of Components
-- Restaurants.jsx
-- Restaurants.css
-- RestaurantCard.jsx
-- RestaurantCard.css
-- LoadingIndicator.jsx
-- Pagination
-  - Pagination component which will have page numbers as buttons
-- You are given these dummy elements (anything with data-testid you should not remove or change the attribute values)
+ ✅ able to submit the app - 1 mark ( minimum score )
+ ✅ Check if the news for India is rendered by default on the dashboard  - 3 marks
+ ✅ Check if the news for India is rendered by default on the search page - 3 marks
+ ✅ Check if sidebar links are working properly - 3 marks
+ ✅ Check if clicking enter in the search bar is redirecting to the search page - 3 marks
+ ✅ Check if search functionality is working properly - 3 marks
+```
 
 ## Installation
 
-- **you may use nvm use 14, if that does not work you can try 16 or later**
+- Use node version >=14 and <17 (v16.16.0 is recommended)
+- please make sure you do not push package-lock.json
 
-```
-// install npm packages
-npm install
+- Download and unzip the boilerplate file and then copy the "**contents**" of the unzipped file in the Masai Folder.
+- Navigate to the Masai Folder, in VS Code.
+- Run the following commands inside,
+  - `npm install`
+  - `npm start`
+  - `npm run server` -> to start the json-server
+- **_Note_**:
 
-// start application locally
-npm run start
+1. Libraries need to be installed by yourself
+2. Make sure that the json-server is up and running at port `8080`
+3. Create a .env file. Include `REACT_APP_JSON_SERVER_PORT=8080` in it and restart the react server
+4. Use `http://localhost:${process.env.REACT_APP_JSON_SERVER_PORT}` as the json-server url where ever you use `http://localhost:8080`
 
-// test locally
-npm run test
-```
+### Not following the above instructions will lead your test cases to fail
 
-## Requirements
+## Problem
 
-- API details
-- `url`: `https://dbioz2ek0e.execute-api.ap-south-1.amazonaws.com/mockapi/getrestaurants`
-- **query params**:
-  - `page`: a number representing the page number
-  - `limit`: a number representing the total number of results per page
-- **response**
-  - `data`: array of restaurant details
-  - `totalPages`: a number representing no of pages
-- For example `https://dbioz2ek0e.execute-api.ap-south-1.amazonaws.com/mockapi/getrestaurants?limit=10&page=1`
-- By default when the user loads the page, the user should be shown a set of products
-  - of page 1
-  - 10 per page
-- You cannot use JSON server
-- use useEffect to display the data on the UI
+**_Note_**: Make sure you start `json-server` on `8080` port with provided `db.json` file, then only you will be able to fetch data on this website.
 
-- `Restaurants`
+## Understanding Component Structure
 
-  - It should contain a LoadingIndicator component by default ( use Conditional rendering )
-    - don't show any other UI when API is loading
-  - You need to make an API call and fetch Restaurants data
-    - you should fetch ten(10) per page
-    - it should be page 1 by default
-  - After we fetch restaurants data, hide the loading indicator
-  - Display the list of RestaurantCards, and pass appropriate data
-  - Display the Pagination component at the bottom
+- Routes
+- Components
+  - Dashboard.jsx (should be rendered on route "/")
+  - SearchResults.jsx (should be rendered on route "/search")
+  - Navbar (should be rendered on every page)
+  - Sidebar (should be rendered on every page)
+- App.js
 
-  ![](https://i.imgur.com/MSaM7ic.png)
+**Note** - `Make sure you use only the given components and don't create new files and folders. Changing the component name, and structures might result in giving you zero marks.`
 
-- `LoadingIndicator`
+## Understanding Data Structure
 
-  - it has an element with the following attribute
-    - `data-testid="loading-indicator"`
-  - it has the text `...Loading`
-  - it will be shown when the API is loading
-  - Please hide all other elements in the UI when the API is loading
+- [db.json](./db.json)
+  - Initial News data should be fetched using json-server only after the application opens.
 
-- `Pagination`
+**Note** - `Make sure you use only the given data and don't create new data. Changing data might result in giving you zero marks`
 
-  - it will accept the following properties
-    - **current** - a number representing the current page
-    - **onChange** - a callback which will be given the new page number `(page)=>{})`
-    - **total** - a number representing the total pages present in the list
-  - Populate page numbers equal to the number of total pages received from the api response. (refer to the image)
-  - The border color of the active button should be `red`
-  - by default page number 1 should be the active page
-  - on click of any `button` the new page number will be sent to the onChange callback.
+## Features to build
 
-- `RestaurantCard`
-  - Component to display information about a single restaurant
-  - the card should have id =`restaurant-card`
-  - it should accept the following props
-    - **name** - the title of the restaurant
-      - `data-testid="restaurant-card-name"`
-    - **type** - The type of the Restaurant
-      - `data-testid="restaurant-card-type"`
-    - **image** - the image URL of the Restaurant
-      - `data-testid="restaurant-card-image"`
-    - **rating** - the rating of the Restaurant
-      - `data-testid="restaurant-card-rating"`
-    - **number_of_votes** - votes of the Restaurant
-      - `data-testid = "restaurant-card-votes"`
-    - **price_starts_from** - the minimum price of the restaurant
-      - `data-testid = "restaurant-card-price"`
+Create a new app where users would be able to search for news for any category (eg. technology, business, general, etc). Also, show different countries' links for news on the sidebar for easy access.
 
-#### **Note**
+## Components to build
 
-- Make sure you use only the given components and don't create new Components, files, or folders of your own. Changing the component name, and file/folder structures might result in giving you zero marks
-- Do Not Remove `data-testid="xxxx"` from anywhere, these are used by testing tools to test your code, and removal of this will lead to the low score.
-- Also make sure to cross-check all the spellings and Cases of Texts.
+ - Dashboard
+ 
+   1. Page will have a navbar and a sidebar.
+   2. On clicking a country in the sidebar, the updated news data should be shown here
+   3. Show results filtered by country = India, by default
+ 
+ - SearchResults
+  
+   1. Page will have a navbar and a sidebar.
+   2. On clicking enter in the search bar (navbar), the updated news data should be shown here
+   3. Show results filtered by country = India, by default (if there is no search key)
 
-### General Guidelines
+ - Navbar
+ 
+  1. Navbar will have a link to the home page and search input box, and the sidebar will have links to different country news.
+  2. On pressing Enter, the user should be able to search by category and the results should be displayed on the searchResults component thus the page should be redirected to "/search.
+- **_Note_**: for getting the results by category use ***/news?category_like=${searchKey}. so that you get the results based on the search query(this will give the results which contain searchkey as a substring of a category).
+  
+ - Sidebar 
+ 
+  1. This will have a list of 5 countries already given to you.
+  2. On clicking any country, show the news data filtered by that country (make sure to use the country code to filter data and not the country name)
+  3. Handle the filter logic by json server itself (Ref: https://github.com/typicode/json-server)
+  2. On clicking on a particular country on the sidebar, users should be able to see news of that country on Dashboard.
+
+- **_Note_**: Whenever you are searching for filtered results search like category_like=business or country_like=in
+don't filter like using category=bus in the query params for the above problem.
+
+<img width="1725" alt="Screenshot 2023-01-19 at 12 42 38 PM" src="https://user-images.githubusercontent.com/39851506/213464964-37194232-6649-4d1c-9024-7ac9109e4237.png">
+<img width="1727" alt="Screenshot 2023-01-19 at 12 42 51 PM" src="https://user-images.githubusercontent.com/39851506/213464977-9f679f1a-807d-4d49-8ea5-20532bc8fc8f.png">
+<img width="1728" alt="Screenshot 2023-01-19 at 12 43 07 PM" src="https://user-images.githubusercontent.com/39851506/213465013-98cf20bc-163d-48da-97c0-9ef8472928ab.png">
+
+
+## General Instructions (**_IMPORTANT_**)
+
+1. Do not use Global CSS, instead use `<componentName>.module.css` convention for Css in that file.
+2. Do Not Remove `data-cy="xxxx"` from anywhere, this are used by testing tools to test your code, removal of this will lead to low score.
+3. Make sure you use only the given components and dont create new files and folders as chaging component name, structures might result in giving you zero marks
+4. Make sure you use only the given data and dont create new data, as chaging data might result in giving you zero marks.
+
+**Note** - This might not be all the things, you are free to use other components.
+
+#### General guidelines
 
 - The system on cp.masaischool.com may take between 1-20 minutes for responding,
 - so we request you to read the problem carefully and debug it before itself
-- we also request you not to just submit it last minute
+- we also request you not just submit it last minute
 - try to keep one submission at a time
